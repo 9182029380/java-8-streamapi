@@ -150,7 +150,8 @@ public class EmployeeStreamOperations {
 
         // Get all email domains
         List<String> emailDomains = employees.stream()
-                .map(emp -> emp.getEmail().substring(emp.getEmail().indexOf("@") + 1))
+                .map(emp -> emp.getEmail().
+                        substring(emp.getEmail().indexOf("@") + 1))
                 .distinct()
                 .collect(Collectors.toList());
         System.out.println("Email Domains: " + emailDomains);
@@ -168,14 +169,16 @@ public class EmployeeStreamOperations {
         List<Employee> sortedBySalary = employees.stream()
                 .sorted(Comparator.comparing(Employee::getSalary))
                 .collect(Collectors.toList());
-        System.out.println("Lowest Salary: " + sortedBySalary.get(0).getFullName() + " - $" + sortedBySalary.get(0).getSalary());
+        System.out.println("Lowest Salary: " + sortedBySalary.get(0).getFullName() +
+                " - $" + sortedBySalary.get(0).getSalary());
 
         // Sort by name (descending)
         List<Employee> sortedByNameDesc = employees.stream()
                 .sorted(Comparator.comparing(Employee::getFirstName).reversed())
                 .collect(Collectors.toList());
         System.out.println("Names in Descending Order: " +
-                sortedByNameDesc.stream().limit(3).map(Employee::getFirstName).collect(Collectors.toList()));
+                sortedByNameDesc.stream().limit(3).
+                        map(Employee::getFirstName).collect(Collectors.toList()));
 
         // 4. GROUPING OPERATIONS
         System.out.println("\n4. GROUPING OPERATIONS:");
@@ -214,7 +217,8 @@ public class EmployeeStreamOperations {
         OptionalDouble averageSalary = employees.stream()
                 .mapToDouble(Employee::getSalary)
                 .average();
-        System.out.println("Average Salary: $" + (averageSalary.isPresent() ? averageSalary.getAsDouble() : 0));
+        System.out.println("Average Salary: $" + (averageSalary.isPresent()
+                ? averageSalary.getAsDouble() : 0));
 
         // Maximum salary
         OptionalDouble maxSalary = employees.stream()
